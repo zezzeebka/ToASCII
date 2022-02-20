@@ -1,15 +1,19 @@
 #include <SFML/Graphics.hpp>
 #include "background.h"
+#include "start-screen.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1600, 1100), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(1600, 900), "SFML works!");
 
         sf::Clock backClock;
 
         backClock.restart();
+        StartScreen* startScreen = new StartScreen();
+        Background* background;
 
-        Background background;
+        std::vector< std::vector<sf::Sprite*> > object_list;
+        object_list.push_back(startScreen->ToDraw());
 
         while (window.isOpen())
         {
@@ -22,12 +26,18 @@ int main()
 
             if (backClock.getElapsedTime() >= sf::milliseconds(600)) {
                 backClock.restart();
-                background.Update();
+                background->Update();
             }
 
             window.clear();
 
-            window.draw(background.GetText());
+            for(std::vector<sf::Sprite*>& i : object_list)
+            {
+                for(sf::Sprite* j : i)
+                {
+                     window.draw(*j);
+                }
+            }
 
             window.display();
         }
