@@ -19,7 +19,9 @@ Background::Background()
 
 Background::~Background()
 {
-
+   delete _defaultImage;
+   delete _font;
+   delete _text;
 }
 
 void Background::Update()

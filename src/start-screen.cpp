@@ -26,7 +26,12 @@ StartScreen::StartScreen()
 
 StartScreen::~StartScreen()
 {
-
+    delete ScreenTexture;
+    delete ButtonTexture;
+    delete Screen;
+    delete ButtonSprite;
+    delete Font;
+    delete Text;
 }
 
 std::vector<sf::Sprite*> StartScreen::ToDraw()
