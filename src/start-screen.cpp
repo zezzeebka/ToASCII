@@ -25,3 +25,13 @@ std::vector<sf::Sprite*> StartScreen::ToDraw()
 {
     return Box;
 }
+
+bool StartScreen::getActivity()
+{
+    return isButtonActive;
+}
+
+void StartScreen::setActivity(bool activity)
+{
+    isButtonActive = activity;
+}

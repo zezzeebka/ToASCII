@@ -11,10 +11,13 @@ private:
     sf::Sprite* Screen;
     sf::Sprite* ButtonSprite;
     std::vector<sf::Sprite*> Box;
+    bool isButtonActive = 1;
 public:
     StartScreen();
     ~StartScreen();
     std::vector<sf::Sprite*> ToDraw();
+    bool getActivity();
+    void setActivity(bool activity);
 };
 
 #endif // STARTSCREEN_H

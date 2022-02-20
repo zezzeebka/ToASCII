@@ -20,8 +20,24 @@ int main()
             sf::Event event;
             while (window.pollEvent(event))
             {
-                if (event.type == sf::Event::Closed)
+                switch ( event.type )
+                {
+                case sf::Event::Closed:
                     window.close();
+                    break;
+
+                case sf::Event::MouseButtonPressed:
+                {
+                    sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+                    sf::Vector2f mousePosF ( static_cast<float>( mousePos.x ), static_cast<float>( mousePos.y ) );
+                    if (object_list[0][1]->getGlobalBounds().contains( mousePosF ) && startScreen->getActivity() == 1)
+                    {
+                        startScreen->setActivity(0);
+                        window.close();
+                    }
+                    break;
+                }
+                }
             }
 
             if (backClock.getElapsedTime() >= sf::milliseconds(600)) {
