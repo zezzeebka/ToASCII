@@ -5,7 +5,7 @@ Background::Background(std::string filename, int fontSize)
     _defaultImage = new sf::Image;
     _defaultImage->loadFromFile(filename);
     _font = new sf::Font;
-    _font->loadFromFile("data/arial.ttf");
+    _font->loadFromFile("C:/Github/BgMon/data/FUTRFW.ttf");
     _text = new sf::Text;
     _text->setCharacterSize(fontSize);
     _text->setFont(*_font);
