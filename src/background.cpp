@@ -30,24 +30,25 @@ void Background::Update()
 void Background::toTest(int heigth, int width)
 {
     sf::Color* color = new sf::Color;
-    std::string simbols = "+,*;()%.?}=123&#$098";
+    std::string simbols = " +,*;()%.?}=_-:^~98";
     std::string _picture;
     int pixelsValue = 0;
-    for(int p = 0; p < heigth; p+=10)
+    int fontSize = _text->getCharacterSize();
+    for(int p = 0; p < heigth-fontSize; p+=fontSize)
     {
-        for(int k = 0; k < width; k+=10)
+        for(int k = 0; k < width-fontSize; k+=fontSize)
         {
             pixelsValue = 0;
-            for(int i = 0; i < 10; i++)
+            for(int i = 0; i < fontSize; i++)
             {
-                for(int j = 0; j < 10; j++)
+                for(int j = 0; j < fontSize; j++)
                 {
                     *color = _defaultImage->getPixel(k+j, p+i);
                     pixelsValue += (color->r/3 + color->g/3 + color->b/3);
                 }
             }
-            pixelsValue /= 100;
-            _picture += simbols[pixelsValue/25];
+            pixelsValue /= fontSize*fontSize;
+            _picture += simbols[pixelsValue/13];
         }
         _picture += "\n";
     }
