@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "start-screen.h"
 #include <windows.h>
-
 StartScreen::StartScreen()
 {
     ScreenTexture = new sf::Texture();
@@ -11,6 +10,15 @@ StartScreen::StartScreen()
     Screen = new sf::Sprite(*ScreenTexture);
     ButtonSprite = new sf::Sprite(*ButtonTexture);
     ButtonSprite->setPosition(700, 600);
+
+    Font = new sf::Font();
+    Font->loadFromFile("data/FUTRFW.ttf");
+
+    Text = new sf::Text;
+    Text->setCharacterSize(60);
+    Text->setFont(*Font);
+    Text->setPosition(700, 450);
+    Text->setString("12");
 
     Box.push_back(Screen);
     Box.push_back(ButtonSprite);
@@ -38,7 +46,6 @@ void StartScreen::setActivity(bool activity)
 
 void StartScreen::setFile()
 {
-    char filename[ MAX_PATH ];
 
     OPENFILENAME ofn;
     ZeroMemory( &filename, sizeof( filename ) );
@@ -47,11 +54,21 @@ void StartScreen::setFile()
     ofn.lpstrFilter  = "JPEG(.jpg)\0*.jpg\0 PNG(.png)\0*.png\0";
     ofn.lpstrFile    = filename;
     ofn.nMaxFile     = MAX_PATH;
-    ofn.lpstrTitle   = "Choose .jpg file";
+    ofn.lpstrTitle   = "Choose .jpg or .png file";
     ofn.Flags        = OFN_DONTADDTORECENT | OFN_FILEMUSTEXIST;
 
     if (!GetOpenFileNameA( &ofn ))
     {
         setActivity(1);
     }
+}
+
+sf::Text *StartScreen::getText()
+{
+    return Text;
+}
+
+void StartScreen::setText(std::string text)
+{
+    Text->setString(text);
 }

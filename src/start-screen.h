@@ -11,9 +11,13 @@ private:
     sf::Texture* ButtonTexture;
     sf::Sprite* Screen;
     sf::Sprite* ButtonSprite;
+
     std::vector<sf::Sprite*> Box;
     bool isButtonActive = 1;
     char filename[ MAX_PATH ];
+
+    sf::Font* Font;
+    sf::Text* Text;
 public:
     StartScreen();
     ~StartScreen();
@@ -24,6 +28,9 @@ public:
     void setActivity(bool activity);
 
     void setFile();
+
+    sf::Text* getText();
+    void setText(std::string text);
 };
 
 #endif // STARTSCREEN_H

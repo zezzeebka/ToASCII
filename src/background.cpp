@@ -3,7 +3,7 @@
 Background::Background()
 {
     _defaultImage = new sf::Image;
-    _defaultImage->loadFromFile("data/Image.jpg");
+    _defaultImage->loadFromFile("C:/Github/BgMon/data/Image.jpg");
     _font = new sf::Font;
     _font->loadFromFile("data/FUTRFW.ttf");
     _text = new sf::Text;
