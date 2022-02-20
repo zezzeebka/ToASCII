@@ -33,7 +33,8 @@ int main()
                     if (object_list[0][1]->getGlobalBounds().contains( mousePosF ) && startScreen->getActivity() == 1)
                     {
                         startScreen->setActivity(0);
-                        window.close();
+                        startScreen->setFile();
+                        //window.close();
                     }
                     break;
                 }

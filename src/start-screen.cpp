@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "start-screen.h"
-
+#include <windows.h>
 
 StartScreen::StartScreen()
 {
@@ -34,4 +34,24 @@ bool StartScreen::getActivity()
 void StartScreen::setActivity(bool activity)
 {
     isButtonActive = activity;
+}
+
+void StartScreen::setFile()
+{
+    char filename[ MAX_PATH ];
+
+    OPENFILENAME ofn;
+    ZeroMemory( &filename, sizeof( filename ) );
+    ZeroMemory( &ofn,      sizeof( ofn ) );
+    ofn.lStructSize  = sizeof( ofn );
+    ofn.lpstrFilter  = "JPEG(.jpg)\0*.jpg\0 PNG(.png)\0*.png\0";
+    ofn.lpstrFile    = filename;
+    ofn.nMaxFile     = MAX_PATH;
+    ofn.lpstrTitle   = "Choose .jpg file";
+    ofn.Flags        = OFN_DONTADDTORECENT | OFN_FILEMUSTEXIST;
+
+    if (!GetOpenFileNameA( &ofn ))
+    {
+        setActivity(1);
+    }
 }
