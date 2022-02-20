@@ -28,6 +28,7 @@ public:
     void setActivity(bool activity);
 
     void setFile();
+    std::string getFilename();
 
     sf::Text* getText();
     void setText(std::string text);

@@ -6,15 +6,13 @@ class Background
 {
 private:
     sf::Image* _defaultImage;
-    sf::Image* _changedImage;
-    sf::Texture* _backTexture1;
-    sf::Sprite* _backSrpite;
     sf::Font* _font;
     sf::Text* _text;
 public:
     Background();
+    ~Background();
+    Background(std::string filename, int fontSize);
     void Update();
-    void changePixels(int heigth, int width);
     void toTest(int heigth, int width);
     sf::Sprite& GetSprite();
     sf::Text& GetText();

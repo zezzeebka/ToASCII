@@ -10,7 +10,7 @@ int main()
 
     backClock.restart();
     StartScreen* startScreen = new StartScreen();
-    Background* background = new Background();
+    Background* background;
 
     std::vector< std::vector<sf::Sprite*> > object_list;
     object_list.push_back(startScreen->ToDraw());
@@ -30,12 +30,20 @@ int main()
             {
                 sf::Vector2i mousePos = sf::Mouse::getPosition(window);
                 sf::Vector2f mousePosF ( static_cast<float>( mousePos.x ), static_cast<float>( mousePos.y ) );
-                if (object_list[0][1]->getGlobalBounds().contains( mousePosF ) && startScreen->getActivity() == 1)
-                {
-                    startScreen->setActivity(0);
-                    startScreen->setFile();
-                    //window.close();
+                if(startScreen->getActivity() == 1){
+                    if (object_list[0][1]->getGlobalBounds().contains( mousePosF ))
+                    {
+                        startScreen->setActivity(0);
+                        startScreen->setFile();
+                        if(!startScreen->getFilename().empty())
+                        {
+                            background = new Background(startScreen->getFilename(), std::stoi( startScreen->getText()->getString().toAnsiString() ));
+                            object_list.clear();
+                        }
+                        //window.close();
+                    }
                 }
+
                 break;
             }
             case sf::Event::MouseWheelScrolled:
@@ -45,7 +53,7 @@ int main()
                 {
                     if(fontSize > 5 && fontSize < 29)
                     {
-                    fontSize += event.mouseWheelScroll.delta;
+                        fontSize += event.mouseWheelScroll.delta;
                     }
                     if(fontSize == 5)
                     {
@@ -55,7 +63,7 @@ int main()
                     {
                         fontSize--;
                     }
-                startScreen->setText(std::to_string(fontSize));
+                    startScreen->setText(std::to_string(fontSize));
                 }
             }
             }
@@ -79,6 +87,10 @@ int main()
         if (startScreen->getActivity() == 1)
         {
             window.draw(*startScreen->getText());
+        }
+        else
+        {
+            window.draw(background->GetText());
         }
 
         window.display();
