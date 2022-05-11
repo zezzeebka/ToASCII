@@ -1,1 +1,1 @@
-converter .png ot .jpg image to ASCII
+converter .png or .jpg image to ASCII
